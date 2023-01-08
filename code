@@ -1,0 +1,55 @@
+class Solution {
+public:
+    int maxPoints(vector<vector<int>>&arr) {
+        
+        int n=arr.size();
+
+       
+
+        int res=1;
+
+        int mx=10000001;
+
+        for(int i=0;i<n;i++){
+
+            
+            int x1=arr[i][0],y1=arr[i][1];
+
+            unordered_map<double,int>mp;
+
+
+            for(int j=i+1;j<n;j++){
+
+                int x2=arr[j][0];
+                int y2=arr[j][1];
+               
+
+               if(x1==x2){
+                   mp[mx]++;
+               }else{
+
+                   //finding the slope
+
+                   double slope=(double)(y2-y1)/(double)(x2-x1);
+
+                   mp[slope]++;
+               }
+        
+
+            }
+
+
+            // we have  store the number of points on each possible slope and that is store on value
+            
+            int temp=INT_MIN;
+            for(auto it: mp){
+
+                temp=max(temp,it.second);
+            }
+
+            res=max(res,temp+1);
+        }
+
+        return res;
+    }
+};
